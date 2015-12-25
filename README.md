@@ -7,5 +7,7 @@ A Youtube music player & downloader.
 
 Download: https://hostr.co/zEgzOhl671Qe
 
+Disclaimer: Above is for experimental use. All it does as of right now just downloads MP3's with proper name.
+
 Credits: Andrew Justin Solesa (https://github.com/Shrooms)
 - Whole program.
