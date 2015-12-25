@@ -1,0 +1,11 @@
+C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\bin\Debug\musique libre.exe
+C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\bin\Debug\musique libre.pdb
+C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Debug\musique_libre.PanelProgressBar.resources
+C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Debug\musique_libre.Form1.resources
+C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Debug\musique_libre.Form2.resources
+C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Debug\musique_libre.Form3.resources
+C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Debug\musique_libre.Properties.Resources.resources
+C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Debug\musique libre.csproj.GenerateResource.Cache
+C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Debug\musique libre.exe
+C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Debug\musique libre.pdb
+C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Debug\musique libre.csprojResolveAssemblyReference.cache
