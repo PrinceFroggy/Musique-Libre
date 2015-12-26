@@ -5,7 +5,7 @@
 
 A Youtube music player & downloader.
 
-Download: https://hostr.co/zEgzOhl671Qe
+Download: Build it yourself!
 
 Disclaimer: 
 
