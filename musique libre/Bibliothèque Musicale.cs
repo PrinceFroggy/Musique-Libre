@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Timers;
 using System.Text.RegularExpressions;
 using System.Drawing;
+using System.Net;
 
 namespace musique_libre
 {
@@ -37,10 +38,10 @@ namespace musique_libre
 
         internal struct Song
         {
-            internal string title;
             internal string artist;
+            internal string title;
 
-            internal Image artwork;
+            internal string artwork;
         }
 
         static Song song;
@@ -98,7 +99,7 @@ namespace musique_libre
 
                 #endregion
 
-                internal static bool Song_Download(Form2 _form2, int _option, Song _song, string _url, WebBrowser _browser1)
+                internal static bool Song_Download(Form2 _form2, int _option, string _url, WebBrowser _browser1)
                 {
                     bool ret = default(bool);
                     
@@ -109,12 +110,11 @@ namespace musique_libre
                             try
                             {
                                 _browser1.Navigate(new Uri("about:blank"));
-
                                 _browser1.Navigate("http://www.youtube-mp3.org/");
 
                                 System.Timers.Timer delay1 = new System.Timers.Timer();
                                 delay1.Elapsed += new System.Timers.ElapsedEventHandler(LoadComplete);
-                                delay1.Interval = 60000;
+                                delay1.Interval = 10000;
                                 delay1.Enabled = true;
 
                                 while (!padlock)
@@ -131,7 +131,7 @@ namespace musique_libre
 
                                 System.Timers.Timer delay2 = new System.Timers.Timer();
                                 delay2.Elapsed += new System.Timers.ElapsedEventHandler(LoadComplete);
-                                delay2.Interval = 120000;
+                                delay2.Interval = 90000;
                                 delay2.Enabled = true;
 
                                 while (!padlock)
@@ -163,22 +163,22 @@ namespace musique_libre
                                 {
                                     int index = name.LastIndexOf("-");
 
-                                    _song.title = name.Substring(index + 1);
-                                    _song.artist = name.Substring(0, index);
+                                    song.artist = name.Substring(0, index);
+                                    song.title = name.Substring(index + 1);
                                 }
                                 else if (count == 1)
                                 {
                                     int index = name.IndexOf("-");
 
-                                    _song.title = name.Substring(index + 1);
-                                    _song.artist = name.Substring(0, index);
+                                    song.artist = name.Substring(0, index);
+                                    song.title = name.Substring(index + 1);
                                 }
                                 else
                                 {
-                                    _song.title = name;
+                                    song.title = name;
                                 }
 
-                                _form2.DataTransfer(root, _song.title, _song.artist);
+                                _form2.DataTransfer(root, song.artist, song.title);
 
                                 string url = default(string);
 
@@ -199,11 +199,13 @@ namespace musique_libre
                                 }
 
                                 ret = true;
+
                                 thelock = false;
                             }
                             catch
                             {
                                 ret = false;
+
                                 thelock = true;
                             }
                             #endregion
@@ -229,43 +231,60 @@ namespace musique_libre
 
             internal static class Artwork_Downloader
             {
-                #region Variable
-
-                static bool padlock = default(bool);
-
-                #endregion
-
-                internal static bool Artwork_Download(Form2 _form2, Song _song, WebBrowser _browser2)
+                internal static bool Artwork_Download(Form2 _form2)
                 {
                     bool ret = default(bool);
 
-                    _browser2.Navigate(new Uri("about:blank"));
-
-                    _browser2.Navigate("https://bendodson.com/code/itunes-artwork-finder/");
-
-                    System.Timers.Timer delay1 = new System.Timers.Timer();
-                    delay1.Elapsed += new System.Timers.ElapsedEventHandler(LoadComplete);
-                    delay1.Interval = 60000;
-                    delay1.Enabled = true;
-
-                    while (!padlock)
+                    try
                     {
-                        Application.DoEvents();
+                        WebClient response = new WebClient();
+
+                        string source = default(string);
+
+                        if (!string.IsNullOrEmpty(song.artist))
+                        {
+                            source = response.DownloadString("https://itunesartwork.dodoapps.io/?query=" + song.title + "-" + song.artist + "&entity=album&country=us");
+                        }
+                        else
+                        {
+                            source = response.DownloadString("https://itunesartwork.dodoapps.io/?query=" + song.title + "&entity=album&country=us");
+                        }
+
+                        if (!string.IsNullOrEmpty(source))
+                        {
+                            song.artwork = source.Split(',')[0];
+                            song.artwork = song.artwork.Replace("\"", "");
+                            song.artwork = song.artwork.Replace("[{url:", "");
+                            song.artwork = song.artwork.Replace(@"\", "");
+
+                            _form2.DataTransfer(root, song.artist, song.title, song.artwork);
+
+                            ret = true;
+
+                            thelock = false;
+                        }
+                        else
+                        {
+                            ret = false;
+
+                            thelock = true;
+                        }
+                    }
+                    catch
+                    {
+                        ret = false;
+
+                        thelock = true;
                     }
 
                     return ret;
                 }
-
-                internal static void LoadComplete(object source, ElapsedEventArgs e)
-                {
-                    padlock = true;
-                }
             }
 
-            internal static bool InitiateDownloader(Form2 form2, int option, Song song, string url, WebBrowser browser1, WebBrowser browser2)
+            internal static bool InitiateDownloader(Form2 form2, int option, string url, WebBrowser browser1)
             {
                 bool ret = default(bool);
-                ret = Song_Downloader.Song_Download(form2, option, song, url, browser1);
+                ret = Song_Downloader.Song_Download(form2, option, url, browser1);
 
                 while (!ret)
                 {
@@ -276,13 +295,11 @@ namespace musique_libre
                         return ret;
                     }
                 }
-
+                
                 thelock = default(bool);
 
                 ret = default(bool);
-                ret = Artwork_Downloader.Artwork_Download(form2, song, browser2);
-
-                ret = true;
+                ret = Artwork_Downloader.Artwork_Download(form2);
 
                 while (!ret)
                 {
@@ -323,7 +340,6 @@ namespace musique_libre
         internal static bool Verification()
         {
             bool ret = default(bool);
-
             ret = Library_Verification.InitiateVerifier();
 
             while (!ret)
@@ -334,13 +350,14 @@ namespace musique_libre
             return ret;
         }
 
-        internal static bool Download(Form2 _form2, int _option, string _url, WebBrowser _browser1, WebBrowser _browser2)
+        internal static bool Download(Form2 _form2, int _option, string _url, WebBrowser _browser1)
         {
-            bool ret = default(bool);
-
             song = new Song();
 
-            ret = Library_Download.InitiateDownloader(_form2, _option, song, _url, _browser1, _browser2);
+            thelock = default(bool);
+
+            bool ret = default(bool);
+            ret = Library_Download.InitiateDownloader(_form2, _option, _url, _browser1);
 
             while (!ret)
             {
@@ -350,7 +367,7 @@ namespace musique_libre
                 {
                     _form2.DataTransfer(thelock);
 
-                    return ret;
+                    break;
                 }
             }
 
@@ -360,7 +377,6 @@ namespace musique_libre
         internal static bool Tag()
         {
             bool ret = default(bool);
-
             ret = true;
 
             while (!ret)

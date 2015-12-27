@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.webBrowser2 = new System.Windows.Forms.WebBrowser();
             this.transparentPanel1 = new musique_libre.TransparentPanel();
             this.panelProgressBar1 = new musique_libre.PanelProgressBar();
             this.cueTextBox1 = new musique_libre.CueTextBox();
@@ -48,19 +47,6 @@
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             this.webBrowser1.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser1_Navigated);
             this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
-            // 
-            // webBrowser2
-            // 
-            this.webBrowser2.Location = new System.Drawing.Point(12, 305);
-            this.webBrowser2.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser2.Name = "webBrowser2";
-            this.webBrowser2.ScriptErrorsSuppressed = true;
-            this.webBrowser2.Size = new System.Drawing.Size(353, 199);
-            this.webBrowser2.TabIndex = 5;
-            this.webBrowser2.TabStop = false;
-            this.webBrowser2.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser2_DocumentCompleted);
-            this.webBrowser2.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser2_Navigated);
-            this.webBrowser2.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser2_Navigating);
             // 
             // transparentPanel1
             // 
@@ -107,7 +93,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
             this.ClientSize = new System.Drawing.Size(377, 47);
             this.ControlBox = false;
-            this.Controls.Add(this.webBrowser2);
             this.Controls.Add(this.transparentPanel1);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.cueTextBox1);
@@ -130,7 +115,6 @@
 
         private CueTextBox cueTextBox1;
         private System.Windows.Forms.WebBrowser webBrowser1;
-        private System.Windows.Forms.WebBrowser webBrowser2;
         internal PanelProgressBar panelProgressBar1;
         internal TransparentPanel transparentPanel1;
 

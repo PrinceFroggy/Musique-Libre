@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Net;
 using System.IO;
 using System.Reflection;
+using System.Drawing.Imaging;
 
 namespace musique_libre
 {
@@ -23,10 +24,9 @@ namespace musique_libre
         public string url = default(string);
 
         public string root = default(string);
-        public string title = default(string);
         public string artist = default(string);
-
-        Image artwork = default(Image);
+        public string title = default(string);
+        public string artwork = default(string);
 
         WebClient downloader = default(WebClient);
 
@@ -79,26 +79,44 @@ namespace musique_libre
             thelock = _thelock;
         }
 
-        public void DataTransfer(string _root, string _title, string _artist)
+        public void DataTransfer(string _root, string _artist, string _title)
         {
             root = _root;
-            title = _title;
             artist = _artist;
+            title = _title;
         }
 
-        public void DataTransfer(string _root, string _title, string _artist, Image _artwork)
+        public void DataTransfer(string _root, string _artist, string _title, string _artwork)
         {
             root = _root;
-            title = _title;
             artist = _artist;
+            title = _title;
             artwork = _artwork;
+        }
+
+        #endregion
+
+        #region ArtworkDownloader
+
+        public void ArtworkDownloader()
+        {
+            try
+            {
+                WebClient client = new WebClient();
+                client.DownloadFile(artwork, root + artist + "\\" + title + " - " + "cover.jpg");
+                client.Dispose();
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         #endregion
 
         #region ClearCache
 
-        void DeleteBrowserTempFile()
+        void ClearCacheTempFile()
         {
             string args = "";
             args = ("InetCpl.cpl,ClearMyTracksByProcess 8");
@@ -146,7 +164,6 @@ namespace musique_libre
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 16, 16));
 
             webBrowser1.Navigate(new Uri("about:blank"));
-            webBrowser2.Navigate(new Uri("about:blank"));
         }
 
         #endregion
@@ -184,7 +201,7 @@ namespace musique_libre
 
                 bool ret = default(bool);
 
-                ret = Bibliothèque_Musicale.Download(this, option, url, webBrowser1, webBrowser2);
+                ret = Bibliothèque_Musicale.Download(this, option, url, webBrowser1);
 
                 while (!ret)
                 {
@@ -215,7 +232,7 @@ namespace musique_libre
 
                     InternetSetOption(IntPtr.Zero, INTERNET_OPTION_END_BROWSER_SESSION, IntPtr.Zero, 0);
 
-                    DeleteBrowserTempFile();
+                    ClearCacheTempFile();
 
                     System.Diagnostics.Process.Start("rundll32.exe", "InetCpl.cpl,ClearMyTracksByProcess 8");
 
@@ -294,11 +311,13 @@ namespace musique_libre
 
                 InternetSetOption(IntPtr.Zero, INTERNET_OPTION_END_BROWSER_SESSION, IntPtr.Zero, 0);
 
-                DeleteBrowserTempFile();
+                ClearCacheTempFile();
 
                 System.Diagnostics.Process.Start("rundll32.exe", "InetCpl.cpl,ClearMyTracksByProcess 8");
 
                 DeleteUrlCacheEntry(url);
+
+                ArtworkDownloader();
             }
         }
 
