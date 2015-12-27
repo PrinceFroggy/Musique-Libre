@@ -231,10 +231,8 @@ namespace musique_libre
 
             internal static class Artwork_Downloader
             {
-                internal static bool Artwork_Download(Form2 _form2)
+                internal static void Artwork_Download(Form2 _form2)
                 {
-                    bool ret = default(bool);
-
                     try
                     {
                         WebClient response = new WebClient();
@@ -258,26 +256,12 @@ namespace musique_libre
                             song.artwork = song.artwork.Replace(@"\", "");
 
                             _form2.DataTransfer(root, song.artist, song.title, song.artwork);
-
-                            ret = true;
-
-                            thelock = false;
-                        }
-                        else
-                        {
-                            ret = false;
-
-                            thelock = true;
                         }
                     }
                     catch
                     {
-                        ret = false;
 
-                        thelock = true;
                     }
-
-                    return ret;
                 }
             }
 
@@ -297,21 +281,8 @@ namespace musique_libre
                 }
                 
                 thelock = default(bool);
-
-                ret = default(bool);
-                ret = Artwork_Downloader.Artwork_Download(form2);
-
-                while (!ret)
-                {
-                    Application.DoEvents();
-
-                    if (thelock)
-                    {
-                        return ret;
-                    }
-                }
-
-                thelock = default(bool);
+                
+                Artwork_Downloader.Artwork_Download(form2);
 
                 return ret;
             }

@@ -103,7 +103,7 @@ namespace musique_libre
             try
             {
                 WebClient client = new WebClient();
-                client.DownloadFile(artwork, root + artist + "\\" + title + " - " + "cover.jpg");
+                client.DownloadFile(artwork, root + artist + "\\" + title + ".jpg");
                 client.Dispose();
             }
             catch (Exception)
