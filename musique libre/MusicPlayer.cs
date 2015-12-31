@@ -36,6 +36,8 @@ namespace musique_libre
         MusicDownloader musicDownloader;
         MusicLibrary musicLibrary;
 
+        public bool padlock = default(bool);
+
         #endregion
 
         #region PInvoke Helpers
@@ -52,6 +54,9 @@ namespace musique_libre
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(int L, int T, int R, int B, int W, int H);
 
+        [DllImport("winmm.dll")]
+        private static extern long mciSendString(string strCommand, StringBuilder strReturn, int iReturnLength, IntPtr oCallback);
+
         #endregion
 
         #region Overrides
@@ -64,6 +69,28 @@ namespace musique_libre
                 cp.ClassStyle |= CS_DROPSHADOW;
                 return cp;
             }
+        }
+
+        #endregion
+
+        #region Music Play
+
+        public void PlaySound(string root)
+        {
+            string command;
+
+            command = "close MediaFile";
+            mciSendString(command, null, 0, IntPtr.Zero);
+
+            command = "open \"" + root + "\" type mpegvideo alias MediaFile";
+            mciSendString(command, null, 0, IntPtr.Zero);
+
+            command = "play MediaFile";
+            mciSendString(command, null, 0, IntPtr.Zero);
+
+            pictureBox3.Image = Properties.Resources.stop;
+
+            padlock = true;
         }
 
         #endregion
@@ -196,5 +223,31 @@ namespace musique_libre
         }
 
         #endregion
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            if (padlock)
+            {
+                pictureBox3.Image = Properties.Resources.play;
+
+                padlock = false;
+            }
+            else
+            {
+                pictureBox3.Image = Properties.Resources.stop;
+
+                padlock = true;
+            }
+        }
     }
 }

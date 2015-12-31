@@ -16,7 +16,7 @@ namespace musique_libre
 {
     public partial class MusicDownloader : Form
     {
-        #region Variable
+        #region Variables
 
         public bool padlock = default(bool);
         public bool thelock = default(bool);

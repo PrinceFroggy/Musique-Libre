@@ -64,6 +64,7 @@
             this.tagToolStripMenuItem.Name = "tagToolStripMenuItem";
             this.tagToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tagToolStripMenuItem.Text = "tag";
+            this.tagToolStripMenuItem.Click += new System.EventHandler(this.tagToolStripMenuItem_Click);
             // 
             // MusicLibrary
             // 

@@ -17,6 +17,8 @@ namespace musique_libre
 
         private MusicPlayer musicPlayer;
 
+        public string path = default(string);
+
         #endregion
 
         #region PInvoke Helpers
@@ -83,9 +85,18 @@ namespace musique_libre
         {
             TreeNode CurrentNode = e.Node;
 
-            string path = CurrentNode.FullPath;
+            path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "musique libre").ToString() + "\\";
+
+            path += CurrentNode.FullPath;
+
+            musicPlayer.PlaySound(path);
 
             e.Cancel = true; 
+        }
+
+        private void tagToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
