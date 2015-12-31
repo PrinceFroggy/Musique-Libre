@@ -1,6 +1,6 @@
 ﻿namespace musique_libre
 {
-    partial class Form2
+    partial class MusicDownloader
     {
         /// <summary>
         /// Required designer variable.
@@ -86,7 +86,7 @@
             this.cueTextBox1.TabStop = false;
             this.cueTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // Form2
+            // MusicDownloader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -100,7 +100,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form2";
+            this.Name = "MusicDownloader";
             this.Opacity = 0.66D;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

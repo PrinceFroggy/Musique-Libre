@@ -14,7 +14,7 @@ using System.Drawing.Imaging;
 
 namespace musique_libre
 {
-    public partial class Form2 : Form
+    public partial class MusicDownloader : Form
     {
         #region Variable
 
@@ -155,9 +155,9 @@ namespace musique_libre
 
         #endregion
 
-        #region Form2
+        #region MusicDownloader
 
-        public Form2()
+        public MusicDownloader()
         {
             InitializeComponent();
 
@@ -238,6 +238,9 @@ namespace musique_libre
 
                     DeleteUrlCacheEntry(url);
                 }
+
+                ret = default(bool);
+                thelock = default(bool);
             }
         }
 

@@ -11,9 +11,9 @@ C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique-libre\musique libr
 C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\bin\Release\musique libre.exe
 C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\bin\Release\musique libre.pdb
 C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Release\musique_libre.PanelProgressBar.resources
-C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Release\musique_libre.Form1.resources
-C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Release\musique_libre.Form2.resources
-C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Release\musique_libre.Form3.resources
+C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Release\musique_libre.MusicPlayer.resources
+C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Release\musique_libre.MusicDownloader.resources
+C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Release\musique_libre.MusicLibrary.resources
 C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Release\musique_libre.Properties.Resources.resources
 C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Release\musique libre.csproj.GenerateResource.Cache
 C:\Users\Andrew\Documents\Visual Studio 2010\Projects\musique libre\musique libre\obj\x86\Release\musique libre.exe

@@ -11,8 +11,14 @@ using System.IO;
 
 namespace musique_libre
 {
-    public partial class Form3 : Form
+    public partial class MusicLibrary : Form
     {
+        #region Variable
+
+        private MusicPlayer musicPlayer;
+
+        #endregion
+
         #region PInvoke Helpers
 
         private const int CS_DROPSHADOW = 0x20000;
@@ -45,16 +51,18 @@ namespace musique_libre
                 nodes.Add(t);
                 PopulateTree(d.FullName, t.Nodes);
             }
-            foreach (FileInfo f in directory.GetFiles())
+            foreach (FileInfo f in directory.GetFiles("*.mp3"))
             {
                 TreeNode t = new TreeNode(f.Name);
                 nodes.Add(t);
             }
         }
 
-        public Form3()
+        public MusicLibrary(MusicPlayer player)
         {
             InitializeComponent();
+
+            musicPlayer = player as MusicPlayer;
 
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 16, 16));
 

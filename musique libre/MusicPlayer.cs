@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace musique_libre
 {
-    public partial class Form1 : Form
+    public partial class MusicPlayer : Form
     {
         #region Credit
 
@@ -28,6 +28,13 @@ namespace musique_libre
      * 
      
          */
+
+        #endregion
+
+        #region Variables
+
+        MusicDownloader musicDownloader;
+        MusicLibrary musicLibrary;
 
         #endregion
 
@@ -61,16 +68,9 @@ namespace musique_libre
 
         #endregion
 
-        #region Variables
+        #region MusicPlayer
 
-        Form2 form2 = new Form2();
-        Form3 form3 = new Form3();
-
-        #endregion
-
-        #region Form1
-
-        public Form1()
+        public MusicPlayer()
         {
             InitializeComponent();
 
@@ -78,11 +78,13 @@ namespace musique_libre
 
             contextMenuStrip1.Cursor = Cursors.Hand;
 
-            form2.Show();
-            form2.Hide();
+            musicDownloader = new MusicDownloader();
+            musicDownloader.Show();
+            musicDownloader.Hide();
 
-            form3.Show();
-            form3.Hide();
+            musicLibrary = new MusicLibrary(this);
+            musicLibrary.Show();
+            musicLibrary.Hide();
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -108,15 +110,15 @@ namespace musique_libre
         {
             Cursor.Current = Cursors.Hand;
 
-            form2.Location = new Point(this.Location.X - 106, this.Location.Y + 173);
+            musicDownloader.Location = new Point(this.Location.X - 106, this.Location.Y + 173);
 
-            if (form2.Visible)
+            if (musicDownloader.Visible)
             {
-                form3.Location = new Point(form2.Location.X, form2.Location.Y + 54);
+                musicLibrary.Location = new Point(musicDownloader.Location.X, musicDownloader.Location.Y + 54);
             }
             else
             {
-                form3.Location = new Point(this.Location.X - 106, this.Location.Y + 173);
+                musicLibrary.Location = new Point(this.Location.X - 106, this.Location.Y + 173);
             }
         }
 
@@ -137,17 +139,17 @@ namespace musique_libre
         {
             if (downloadToolStripMenuItem.Checked == false)
             {
-                form2.Show();
+                musicDownloader.Show();
 
-                form3.Location = new Point(form2.Location.X, form2.Location.Y + 54);
+                musicLibrary.Location = new Point(musicDownloader.Location.X, musicDownloader.Location.Y + 54);
 
                 downloadToolStripMenuItem.Checked = true;
             }
             else
             {
-                form2.Hide();
+                musicDownloader.Hide();
 
-                form3.Location = new Point(this.Location.X - 106, this.Location.Y + 173);
+                musicLibrary.Location = new Point(this.Location.X - 106, this.Location.Y + 173);
 
                 downloadToolStripMenuItem.Checked = false;
             }
@@ -157,13 +159,13 @@ namespace musique_libre
         {
             if (libraryToolStripMenuItem.Checked == false)
             {
-                form3.Show();
+                musicLibrary.Show();
 
                 libraryToolStripMenuItem.Checked = true;
             }
             else
             {
-                form3.Hide();
+                musicLibrary.Hide();
 
                 libraryToolStripMenuItem.Checked = false;
             }

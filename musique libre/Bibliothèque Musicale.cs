@@ -99,7 +99,7 @@ namespace musique_libre
 
                 #endregion
 
-                internal static bool Song_Download(Form2 _form2, int _option, string _url, WebBrowser _browser1)
+                internal static bool Song_Download(MusicDownloader _downloader, int _option, string _url, WebBrowser _browser1)
                 {
                     bool ret = default(bool);
                     
@@ -178,7 +178,7 @@ namespace musique_libre
                                     song.title = name;
                                 }
 
-                                _form2.DataTransfer(root, song.artist, song.title);
+                                _downloader.DataTransfer(root, song.artist, song.title);
 
                                 string url = default(string);
 
@@ -190,7 +190,7 @@ namespace musique_libre
                                     {
                                         url = murl[0].ToString().Replace("\"", "");
 
-                                        _form2.padlock = true;
+                                        _downloader.padlock = true;
 
                                         href.InvokeMember("click");
 
@@ -231,7 +231,7 @@ namespace musique_libre
 
             internal static class Artwork_Downloader
             {
-                internal static void Artwork_Download(Form2 _form2)
+                internal static void Artwork_Download(MusicDownloader _downloader)
                 {
                     try
                     {
@@ -255,7 +255,7 @@ namespace musique_libre
                             song.artwork = song.artwork.Replace("[{url:", "");
                             song.artwork = song.artwork.Replace(@"\", "");
 
-                            _form2.DataTransfer(root, song.artist, song.title, song.artwork);
+                            _downloader.DataTransfer(root, song.artist, song.title, song.artwork);
                         }
                     }
                     catch
@@ -265,10 +265,10 @@ namespace musique_libre
                 }
             }
 
-            internal static bool InitiateDownloader(Form2 form2, int option, string url, WebBrowser browser1)
+            internal static bool InitiateDownloader(MusicDownloader downloader, int option, string url, WebBrowser browser1)
             {
                 bool ret = default(bool);
-                ret = Song_Downloader.Song_Download(form2, option, url, browser1);
+                ret = Song_Downloader.Song_Download(downloader, option, url, browser1);
 
                 while (!ret)
                 {
@@ -282,7 +282,7 @@ namespace musique_libre
                 
                 thelock = default(bool);
                 
-                Artwork_Downloader.Artwork_Download(form2);
+                Artwork_Downloader.Artwork_Download(downloader);
 
                 return ret;
             }
@@ -321,14 +321,14 @@ namespace musique_libre
             return ret;
         }
 
-        internal static bool Download(Form2 _form2, int _option, string _url, WebBrowser _browser1)
+        internal static bool Download(MusicDownloader _downloader, int _option, string _url, WebBrowser _browser1)
         {
             song = new Song();
 
             thelock = default(bool);
 
             bool ret = default(bool);
-            ret = Library_Download.InitiateDownloader(_form2, _option, _url, _browser1);
+            ret = Library_Download.InitiateDownloader(_downloader, _option, _url, _browser1);
 
             while (!ret)
             {
@@ -336,11 +336,13 @@ namespace musique_libre
 
                 if (thelock)
                 {
-                    _form2.DataTransfer(thelock);
+                    _downloader.DataTransfer(thelock);
 
                     break;
                 }
             }
+
+            thelock = default(bool);
 
             return ret;
         }
