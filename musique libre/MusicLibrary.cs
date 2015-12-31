@@ -54,6 +54,7 @@ namespace musique_libre
             foreach (FileInfo f in directory.GetFiles("*.mp3"))
             {
                 TreeNode t = new TreeNode(f.Name);
+                t.ContextMenuStrip = contextMenuStrip1;
                 nodes.Add(t);
             }
         }
@@ -63,6 +64,8 @@ namespace musique_libre
             InitializeComponent();
 
             musicPlayer = player as MusicPlayer;
+
+            contextMenuStrip1.Cursor = Cursors.Hand;
 
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 16, 16));
 

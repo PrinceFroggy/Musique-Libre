@@ -212,6 +212,29 @@ namespace musique_libre
                             break;
                         case 1:
                             #region Soundcloud Downloader
+                            try
+                            {
+                                _browser1.Navigate(new Uri("about:blank"));
+                                _browser1.Navigate("http://scdownloader.net//");
+
+                                System.Timers.Timer delay1 = new System.Timers.Timer();
+                                delay1.Elapsed += new System.Timers.ElapsedEventHandler(LoadComplete);
+                                delay1.Interval = 10000;
+                                delay1.Enabled = true;
+
+                                while (!padlock)
+                                {
+                                    Application.DoEvents();
+                                }
+
+                                delay1.Enabled = false;
+
+                                padlock = default(bool);
+                            }
+                            catch
+                            {
+
+                            }
                             #endregion
                             break;
                         case 2:
