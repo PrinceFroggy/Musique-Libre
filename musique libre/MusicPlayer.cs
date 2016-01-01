@@ -86,6 +86,7 @@ namespace musique_libre
             mciSendString(command, null, 0, IntPtr.Zero);
 
             command = "play MediaFile";
+            command += " REPEAT";
             mciSendString(command, null, 0, IntPtr.Zero);
 
             pictureBox3.Image = Properties.Resources.stop;
