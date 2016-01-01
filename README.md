@@ -3,7 +3,7 @@
 
 ![ScreenShot](https://hostr.co/file/970/E7kguVRGUHtd/PICMEHAVINGSEC.png)
 
-A Youtube music downloader & player.
+A Youtube/Soundcloud music downloader (cover art too), player & tagger.
 
 Download: Build it yourself!
 
