@@ -11,7 +11,7 @@ Disclaimer:
 
 Above is for experimental use. 
 
-All it does (as of right now) is downloads MP3's with proper name to the Libraries\Documents directory & the coverart. 
+All it does (as of right now) is downloads MP3's with proper name to the Libraries\Documents directory & the coverart. Also plays the music from the library.
 
 Credits: Andrew Justin Solesa (https://github.com/Shrooms)
 - Whole program.
