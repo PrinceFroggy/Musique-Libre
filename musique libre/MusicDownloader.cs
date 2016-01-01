@@ -96,7 +96,7 @@ namespace musique_libre
 
         #endregion
 
-        #region ArtworkDownloader
+        #region Artwork Download
 
         public void ArtworkDownloader()
         {
@@ -155,7 +155,7 @@ namespace musique_libre
 
         #endregion
 
-        #region MusicDownloader
+        #region MusicDownloader Events
 
         public MusicDownloader()
         {

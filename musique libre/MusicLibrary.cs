@@ -89,7 +89,7 @@ namespace musique_libre
 
             path += CurrentNode.FullPath;
 
-            musicPlayer.PlaySound(path);
+            musicPlayer.PlaySound(path, true);
 
             e.Cancel = true; 
         }

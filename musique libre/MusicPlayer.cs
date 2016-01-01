@@ -73,30 +73,43 @@ namespace musique_libre
 
         #endregion
 
-        #region Music Play
+        #region Sound Events
 
-        public void PlaySound(string root)
+        public void PlaySound(string root, bool option)
         {
-            string command;
+            toolTip1.SetToolTip(pictureBox1, "stop");
 
+            string command;
+            
             command = "close MediaFile";
             mciSendString(command, null, 0, IntPtr.Zero);
 
-            command = "open \"" + root + "\" type mpegvideo alias MediaFile";
+            if (option)
+            {
+                command = "open \"" + root + "\" type mpegvideo alias MediaFile";
+                mciSendString(command, null, 0, IntPtr.Zero);
+
+                command = "play MediaFile";
+                command += " REPEAT";
+                mciSendString(command, null, 0, IntPtr.Zero);
+
+                pictureBox1.Image = Properties.Resources.stop;
+
+                padlock = true;
+            }
+        }
+
+        public void StopSound()
+        {
+            toolTip1.SetToolTip(pictureBox1, "play");
+
+            string command = "close MediaFile";
             mciSendString(command, null, 0, IntPtr.Zero);
-
-            command = "play MediaFile";
-            command += " REPEAT";
-            mciSendString(command, null, 0, IntPtr.Zero);
-
-            pictureBox3.Image = Properties.Resources.stop;
-
-            padlock = true;
         }
 
         #endregion
 
-        #region MusicPlayer
+        #region MusicPlayer Events
 
         public MusicPlayer()
         {
@@ -115,7 +128,7 @@ namespace musique_libre
             musicLibrary.Hide();
         }
 
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        private void MusicPlayer_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -126,7 +139,7 @@ namespace musique_libre
             }
         }
 
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        private void MusicPlayer_MouseMove(object sender, MouseEventArgs e)
         {
             if (transparentPanel1.Bounds.Contains(e.Location) && !transparentPanel1.Visible)
             {
@@ -134,7 +147,7 @@ namespace musique_libre
             }
         }
 
-        private void Form1_LocationChanged(object sender, EventArgs e)
+        private void MusicPlayer_LocationChanged(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.Hand;
 
@@ -225,30 +238,26 @@ namespace musique_libre
 
         #endregion
 
+        #region pictureBox1
+
         private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
         {
             if (padlock)
             {
-                pictureBox3.Image = Properties.Resources.play;
+                pictureBox1.Image = Properties.Resources.play;
+
+                StopSound();
 
                 padlock = false;
             }
             else
             {
-                pictureBox3.Image = Properties.Resources.stop;
+                pictureBox1.Image = Properties.Resources.stop;
 
                 padlock = true;
             }
         }
+
+        #endregion
     }
 }

@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MusicPlayer));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.visibilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,50 +39,22 @@
             this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transparentPanel1 = new musique_libre.TransparentPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.transparentPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox2.Image = global::musique_libre.Properties.Resources.prev;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
-            this.toolTip1.SetToolTip(this.pictureBox2, "previous");
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox3.Image = global::musique_libre.Properties.Resources.play;
-            this.pictureBox3.Location = new System.Drawing.Point(61, 0);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox3.TabIndex = 3;
-            this.pictureBox3.TabStop = false;
-            this.toolTip1.SetToolTip(this.pictureBox3, "play");
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = global::musique_libre.Properties.Resources.next;
-            this.pictureBox1.Location = new System.Drawing.Point(122, 0);
+            this.pictureBox1.Image = global::musique_libre.Properties.Resources.play;
+            this.pictureBox1.Location = new System.Drawing.Point(61, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(20, 20);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            this.toolTip1.SetToolTip(this.pictureBox1, "next");
+            this.toolTip1.SetToolTip(this.pictureBox1, "play");
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // contextMenuStrip1
@@ -138,8 +108,6 @@
             // 
             // transparentPanel1
             // 
-            this.transparentPanel1.Controls.Add(this.pictureBox2);
-            this.transparentPanel1.Controls.Add(this.pictureBox3);
             this.transparentPanel1.Controls.Add(this.pictureBox1);
             this.transparentPanel1.Location = new System.Drawing.Point(12, 134);
             this.transparentPanel1.Name = "transparentPanel1";
@@ -170,11 +138,9 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
-            this.LocationChanged += new System.EventHandler(this.Form1_LocationChanged);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.LocationChanged += new System.EventHandler(this.MusicPlayer_LocationChanged);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MusicPlayer_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MusicPlayer_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.transparentPanel1.ResumeLayout(false);
@@ -194,8 +160,6 @@
         private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem creditsToolStripMenuItem;
         public System.Windows.Forms.PictureBox pictureBox1;
-        public System.Windows.Forms.PictureBox pictureBox2;
-        public System.Windows.Forms.PictureBox pictureBox3;
     }
 }
 
