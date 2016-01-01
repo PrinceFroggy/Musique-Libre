@@ -130,13 +130,7 @@
     <None Include="Images\stop.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\prev.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Images\play.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Images\next.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\404.png" />
