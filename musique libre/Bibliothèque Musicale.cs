@@ -215,7 +215,7 @@ namespace musique_libre
                             try
                             {
                                 _browser1.Navigate(new Uri("about:blank"));
-                                _browser1.Navigate("http://scdownloader.net//");
+                                _browser1.Navigate("http://scdownloader.net/");
 
                                 System.Timers.Timer delay1 = new System.Timers.Timer();
                                 delay1.Elapsed += new System.Timers.ElapsedEventHandler(LoadComplete);
@@ -230,10 +230,54 @@ namespace musique_libre
                                 delay1.Enabled = false;
 
                                 padlock = default(bool);
+
+                                _browser1.Document.GetElementById("songURL").SetAttribute("value", _url);
+
+                                HtmlElementCollection classButton1 = _browser1.Document.All;
+
+                                foreach (HtmlElement element in classButton1)
+                                {
+                                    if (element.GetAttribute("className") == "button secondary")
+                                    {
+                                        element.InvokeMember("click");
+                                    }
+                                }
+
+                                System.Timers.Timer delay2 = new System.Timers.Timer();
+                                delay2.Elapsed += new System.Timers.ElapsedEventHandler(LoadComplete);
+                                delay2.Interval = 90000;
+                                delay2.Enabled = true;
+
+                                while (!padlock)
+                                {
+                                    Application.DoEvents();
+                                }
+
+                                delay2.Enabled = false;
+
+                                padlock = default(bool);
+
+                                HtmlElementCollection classButton2 = _browser1.Document.All;
+
+                                foreach (HtmlElement element in classButton2)
+                                {
+                                    if (element.GetAttribute("className") == "button secondary")
+                                    {
+                                        _downloader.padlock = true;
+
+                                        element.InvokeMember("click");
+                                    }
+                                }
+
+                                ret = true;
+
+                                thelock = false;
                             }
                             catch
                             {
+                                ret = false;
 
+                                thelock = true;
                             }
                             #endregion
                             break;

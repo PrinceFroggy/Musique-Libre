@@ -275,13 +275,21 @@ namespace musique_libre
                     {
                         System.IO.Directory.CreateDirectory(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "musique libre\\" + "Various Artist"));
 
-                        root = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "musique libre").ToString() + "\\" + System.DateTime.Now.ToString("dd-MM-yyyy (HH-mm-ss)") + "\\";
+                        root = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "musique libre").ToString() + "\\Various Artist\\" + System.DateTime.Now.ToString("dd-MM-yyyy (HH-mm-ss)");
                     }
 
                     downloader = new WebClient();
                     downloader.DownloadFileCompleted += new AsyncCompletedEventHandler(Complete);
                     downloader.DownloadProgressChanged += new DownloadProgressChangedEventHandler(Progress);
-                    downloader.DownloadFileAsync(new Uri(url), root + title + ".mp3");
+
+                    if (title != null)
+                    {
+                        downloader.DownloadFileAsync(new Uri(url), root + title + ".mp3");
+                    }
+                    else
+                    {
+                        downloader.DownloadFileAsync(new Uri(url), root + ".mp3");
+                    }
                 }
             }
             catch (WebException)
@@ -325,21 +333,6 @@ namespace musique_libre
         }
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-
-        }
-
-        private void webBrowser2_Navigated(object sender, WebBrowserNavigatedEventArgs e)
-        {
-            this.Cursor = Cursors.Default;
-        }
-
-        private void webBrowser2_Navigating(object sender, WebBrowserNavigatingEventArgs e)
-        {
-            this.Cursor = Cursors.Default;
-        }
-
-        private void webBrowser2_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
 
         }
