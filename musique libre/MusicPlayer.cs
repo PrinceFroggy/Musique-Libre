@@ -36,6 +36,8 @@ namespace musique_libre
         MusicDownloader musicDownloader;
         MusicLibrary musicLibrary;
 
+        public List<string> library = new List<string>();
+
         public bool padlock = default(bool);
 
         #endregion
@@ -69,6 +71,15 @@ namespace musique_libre
                 cp.ClassStyle |= CS_DROPSHADOW;
                 return cp;
             }
+        }
+
+        #endregion
+
+        #region Add Song to Library
+
+        public void AddSong(string song)
+        {
+            library.Add(song);
         }
 
         #endregion

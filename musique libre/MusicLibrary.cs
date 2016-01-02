@@ -17,6 +17,9 @@ namespace musique_libre
 
         private MusicPlayer musicPlayer;
 
+        string root = default(string);
+        string name = default(string);
+
         public string path = default(string);
 
         #endregion
@@ -47,16 +50,32 @@ namespace musique_libre
         public void PopulateTree(string dir, TreeNodeCollection nodes)
         {
             DirectoryInfo directory = new DirectoryInfo(dir);
+
             foreach (DirectoryInfo d in directory.GetDirectories())
             {
                 TreeNode t = new TreeNode(d.Name);
+
+                root = default(string);
+                root += System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "musique libre").ToString() + "\\";
+                root += d.Name;
+                root += "\\";
+
                 nodes.Add(t);
+
                 PopulateTree(d.FullName, t.Nodes);
             }
+
             foreach (FileInfo f in directory.GetFiles("*.mp3"))
             {
                 TreeNode t = new TreeNode(f.Name);
+
+                name = root;
+                name += f.Name;
+
+                musicPlayer.AddSong(name);
+
                 t.ContextMenuStrip = contextMenuStrip1;
+
                 nodes.Add(t);
             }
         }
