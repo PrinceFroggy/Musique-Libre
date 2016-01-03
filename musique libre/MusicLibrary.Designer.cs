@@ -56,13 +56,13 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tagToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(92, 26);
             // 
             // tagToolStripMenuItem
             // 
             this.tagToolStripMenuItem.Image = global::musique_libre.Properties.Resources.tag;
             this.tagToolStripMenuItem.Name = "tagToolStripMenuItem";
-            this.tagToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tagToolStripMenuItem.Size = new System.Drawing.Size(91, 22);
             this.tagToolStripMenuItem.Text = "tag";
             this.tagToolStripMenuItem.Click += new System.EventHandler(this.tagToolStripMenuItem_Click);
             // 

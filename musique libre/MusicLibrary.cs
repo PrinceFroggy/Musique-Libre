@@ -110,7 +110,7 @@ namespace musique_libre
 
             musicPlayer.PlaySound(path, true);
 
-            e.Cancel = true; 
+            e.Cancel = true;
         }
 
         private void tagToolStripMenuItem_Click(object sender, EventArgs e)
